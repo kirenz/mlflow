@@ -1,0 +1,5 @@
+flavors:
+  crate:
+    version: 0.1.0
+    model: crate.bin
+utc_time_created: 19-09-25T13:56:34.34.95
