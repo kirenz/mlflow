@@ -1,16 +1,15 @@
 # MLflow classification model example 
 
-library(mlflow)
+library(tidyverse)
 library(glmnet)
 library(carrier)
-library(readr)
-library(tidyr)
+library(mlflow)
 
 set.seed(40)
 
 link <-  "https://raw.githubusercontent.com/kirenz/datasets/master/winequality-red.csv"
 data <- read_csv2(link)
-data <-   drop_na(data)
+data <- drop_na(data)
 data$quality <- as.integer(data$quality)
 
 # Split the data into training and test sets. (0.75, 0.25) split.
@@ -18,13 +17,14 @@ sampled <- sample(1:nrow(data), 0.75 * nrow(data))
 train <- data[sampled, ]
 test <- data[-sampled, ]
 
-# The predicted column is "quality" which is a scalar from [3, 9]
-train_x <- data.matrix(train[, !(names(train) == "quality")])
-test_x <- data.matrix(test[, !(names(train) == "quality")])
+# The label is "quality"
+train_x <- data.matrix(train[ , !(names(train) == "quality")])
+test_x  <- data.matrix(test[ , !(names(train) == "quality")])
 train_y <- train[["quality"]]
-test_y <- test[["quality"]]
+test_y  <- test[["quality"]]
 
-alpha <- mlflow_param("alpha", 0.5, "numeric")
+# Set hyperparameters
+alpha <- mlflow_param("alpha", 0.4, "numeric")
 lambda <- mlflow_param("lambda", 0.5, "numeric")
 
 with(mlflow_start_run(), {
