@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/sklearn_elasticnet_wine/mlruns/0/fd369e53629d4882be8cf699216c05e0/artifacts
+end_time: 1673814202975
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fd369e53629d4882be8cf699216c05e0
+run_name: magnificent-lamb-688
+run_uuid: fd369e53629d4882be8cf699216c05e0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1673814201545
+status: 3
+tags: []
+user_id: jankirenz
