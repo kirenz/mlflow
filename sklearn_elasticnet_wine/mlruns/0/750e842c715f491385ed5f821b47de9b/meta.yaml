@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/sklearn_elasticnet_wine/mlruns/0/750e842c715f491385ed5f821b47de9b/artifacts
+end_time: 1676405835112
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 750e842c715f491385ed5f821b47de9b
+run_name: auspicious-wren-834
+run_uuid: 750e842c715f491385ed5f821b47de9b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1676405581212
+status: 3
+tags: []
+user_id: jankirenz

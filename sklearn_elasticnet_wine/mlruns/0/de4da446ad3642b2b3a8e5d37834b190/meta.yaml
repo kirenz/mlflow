@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/sklearn_elasticnet_wine/mlruns/0/de4da446ad3642b2b3a8e5d37834b190/artifacts
+end_time: 1676406325932
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: de4da446ad3642b2b3a8e5d37834b190
+run_name: rambunctious-gnu-973
+run_uuid: de4da446ad3642b2b3a8e5d37834b190
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1676406324422
+status: 3
+tags: []
+user_id: jankirenz

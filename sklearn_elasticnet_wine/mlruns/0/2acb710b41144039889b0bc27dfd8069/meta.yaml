@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/sklearn_elasticnet_wine/mlruns/0/2acb710b41144039889b0bc27dfd8069/artifacts
+end_time: 1676406320455
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2acb710b41144039889b0bc27dfd8069
+run_name: debonair-hen-668
+run_uuid: 2acb710b41144039889b0bc27dfd8069
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1676406318587
+status: 3
+tags: []
+user_id: jankirenz
