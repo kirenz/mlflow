@@ -20,27 +20,46 @@ format:
 
 The MLflow R API allows you to use MLflow Tracking, Projects and Models.
 
-To use the MLflow R API, you must install the MLflow Python package.
+To use the MLflow R API, you must first set up MLflow in Python (see the [mlflow-setup tutorial](../mlflow-setup.md)). 
+
+Start R inside VS Code or RStudio and install the MLflow Python package:
+
+```{r}
+install.packages('mlflow')
+```
+
+
+Activate mlflow:
 
 ```{r}
 library(mlflow)
+library(sys)
 ```
 
 
-Optionally, you can set the MLFLOW_PYTHON_BIN and MLFLOW_BIN environment variables to specify the Python and MLflow binaries to use. By default, the R client automatically finds them using Sys.which('python') and Sys.which('mlflow').
-
-```{bash}
-export MLFLOW_PYTHON_BIN=/path/to/bin/python
-export MLFLOW_BIN=/path/to/bin/mlflow
+```{r}
+mlflow_ui()
 ```
 
 
-```{python}
-python -version
+Next, we need to set the MLFLOW_PYTHON_BIN and MLFLOW_BIN environment variables to specify the Python and MLflow binaries to use. By default, the R client automatically finds them using Sys.which('python') and Sys.which('mlflow').
+
+```{r}
+Sys.setenv(MLFLOW_PYTHON_BIN='/Users/jankirenz/miniconda3/envs/mlflow/bin/python')
+```
+
+
+```{r}
+Sys.setenv(MLFLOW_BIN='/Users/jankirenz/miniconda3/envs/mlflow/bin/mlflow')
 ```
 
 
 The MLflow *Tracking API* lets you log metrics and artifacts (files) from your data science code and see a history of your runs. You can try it out by writing a simple R script as follows (this example is also included in quickstart/mlflow_tracking.py):
+
+```{r}
+
+```
+
 
 
 ```{r}

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/examples/mlruns/0/3889e9256a2545e6a76b9a25af7081ba/artifacts
+end_time: 1676568478066
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3889e9256a2545e6a76b9a25af7081ba
+run_name: rare-newt-943
+run_uuid: 3889e9256a2545e6a76b9a25af7081ba
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1676568478057
+status: 3
+tags: []
+user_id: jankirenz

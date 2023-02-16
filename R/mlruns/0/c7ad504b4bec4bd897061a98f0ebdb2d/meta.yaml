@@ -1,0 +1,15 @@
+artifact_uri: /Users/jankirenz/lectures/mlflow/R/mlruns/0/c7ad504b4bec4bd897061a98f0ebdb2d/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c7ad504b4bec4bd897061a98f0ebdb2d
+run_name: nervous-lark-784
+run_uuid: c7ad504b4bec4bd897061a98f0ebdb2d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1676567646584
+status: 1
+tags: []
+user_id: jankirenz

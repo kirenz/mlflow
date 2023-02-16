@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/sklearn_elasticnet_wine/mlruns/0/b233ae52f3b1447892a5ef0e3a1dbe25/artifacts
+end_time: 1676568258457
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b233ae52f3b1447892a5ef0e3a1dbe25
+run_name: dazzling-wren-586
+run_uuid: b233ae52f3b1447892a5ef0e3a1dbe25
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1676568257057
+status: 3
+tags: []
+user_id: jankirenz
