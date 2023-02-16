@@ -1,0 +1,61 @@
+---
+title: "Mlflow Introduction" 
+execute:
+  echo: true # show code
+format: 
+  html: # output format
+    embed-resources: true # create a self-contained html
+    code-fold: true # if we show code, use as fold
+    theme: 
+      - cosmo # a html theme (try sketchy or darkly)
+      - custom.scss # additional custom scss
+    toc: true # table of content
+    number-depth: 3 # deepest level 
+    toc-title: Contents # content title
+    toc-location: left # toc alignment
+    number-sections: true # use numbering
+    html-math-method: mathjax # displays mathematical notation 
+    smooth-scroll: true # smooth scrolling
+---
+
+The MLflow R API allows you to use MLflow Tracking, Projects and Models.
+
+To use the MLflow R API, you must install the MLflow Python package.
+
+```{r}
+library(mlflow)
+```
+
+
+Optionally, you can set the MLFLOW_PYTHON_BIN and MLFLOW_BIN environment variables to specify the Python and MLflow binaries to use. By default, the R client automatically finds them using Sys.which('python') and Sys.which('mlflow').
+
+```{bash}
+export MLFLOW_PYTHON_BIN=/path/to/bin/python
+export MLFLOW_BIN=/path/to/bin/mlflow
+```
+
+
+```{python}
+python -version
+```
+
+
+The MLflow *Tracking API* lets you log metrics and artifacts (files) from your data science code and see a history of your runs. You can try it out by writing a simple R script as follows (this example is also included in quickstart/mlflow_tracking.py):
+
+
+```{r}
+library(mlflow)
+
+# Log a parameter (key-value pair)
+mlflow_log_param("param1", 5)
+
+# Log a metric; metrics can be updated throughout the run
+mlflow_log_metric("foo", 1)
+mlflow_log_metric("foo", 2)
+mlflow_log_metric("foo", 3)
+
+# Log an artifact (output file)
+writeLines("Hello world!", "output.txt")
+mlflow_log_artifact("output.txt")
+
+```

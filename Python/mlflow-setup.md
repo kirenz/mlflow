@@ -31,16 +31,5 @@ We’ll use this working directory for running the quickstart.
 
 We follow the [MLflow installation tutorial](https://mlflow.org/docs/latest/quickstart.html#installing-mlflow)
 
----
-
 ## R
 
-```r
-install.packages("mlflow")
-```
-
-Download the quickstart code by cloning MLflow. In your terminal: 
-
-```bash
-git clone https://github.com/mlflow/mlflow
-```
