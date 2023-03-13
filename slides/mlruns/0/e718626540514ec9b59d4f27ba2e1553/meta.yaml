@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/0/e718626540514ec9b59d4f27ba2e1553/artifacts
+end_time: 1678727446741
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e718626540514ec9b59d4f27ba2e1553
+run_name: lyrical-worm-67
+run_uuid: e718626540514ec9b59d4f27ba2e1553
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678727446735
+status: 3
+tags: []
+user_id: jankirenz

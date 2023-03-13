@@ -1,0 +1,103 @@
+---
+title: "Mlflow"
+lang: en 
+subtitle: "Tracking experiments"
+author: Jan Kirenz
+execute:
+  eval: true
+  echo: true
+highlight-style: github
+format:
+  revealjs: 
+    toc: true
+    toc-depth: 1
+    embed-resources: false
+    theme: [dark, custom.scss]  
+    incremental: false
+    transition: slide
+    transition-speed: slow
+    background-transition: fade
+    code-copy: true
+    code-line-numbers: true
+    smaller: false
+    scrollable: true
+    slide-number: c
+    preview-links: auto
+    chalkboard: 
+      buttons: false
+   #logo: images/logo.png
+   #footer: Setup | Jan Kirenz
+---
+
+# Setup {background-image="images/dje.jpg"}
+
+
+## mlflow.start_run()
+
+The mlflow module provides a high-level “fluent” API for starting and managing MLflow runs.
+
+. . .
+
+```{python}
+import mlflow
+
+mlflow.start_run()
+mlflow.log_param("learning_rate", 0.02)
+mlflow.log_metric("mse", 2500.00)
+
+mlflow.end_run()
+```
+
+- Parameter (e.g. model hyperparameter) 
+
+- Metric (e.g. model results)
+
+## mlflow.start_run() as run
+
+- You can also use the context manager syntax like this:
+
+. . .
+
+```{python}
+
+with mlflow.start_run() as run:
+    mlflow.log_param("learning_rate", 0.03)
+    mlflow.log_metric("mse", 900.00)
+
+```
+
+- Automatically terminates the run at the end of the with block.
+
+## Logging multiple metrics
+
+- use a Dictionary 
+
+```{python}
+
+params = {"learning_rate": 0.01, "n_estimators": 10}
+metrics = {"mse": 2500.00, "rmse": 50.00}
+
+# Log a batch of metrics
+with mlflow.start_run():
+    mlflow.log_param(params)
+    mlflow.log_metrics(metrics)
+```
+
+
+
+## Log text
+
+```{python}
+
+with mlflow.start_run():
+    # Log text to a file under the run's root artifact directory
+    mlflow.log_text("text1", "file1.txt")
+
+    # Log text in a subdirectory of the run's root artifact directory
+    mlflow.log_text("text2", "dir/file2.txt")
+
+    # Log HTML text
+    mlflow.log_text("<h1>header</h1>", "index.html")
+```
+
+

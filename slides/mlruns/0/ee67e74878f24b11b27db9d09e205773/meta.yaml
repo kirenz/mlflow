@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/0/ee67e74878f24b11b27db9d09e205773/artifacts
+end_time: 1678728209874
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ee67e74878f24b11b27db9d09e205773
+run_name: traveling-frog-918
+run_uuid: ee67e74878f24b11b27db9d09e205773
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678728209867
+status: 3
+tags: []
+user_id: jankirenz
