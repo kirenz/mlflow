@@ -29,8 +29,10 @@ format:
    #footer: Setup | Jan Kirenz
 ---
 
-# Setup {background-image="images/dje.jpg"}
+# Basics {background-image="images/dje.jpg"}
 
+
+## 
 
 ## mlflow.start_run()
 
