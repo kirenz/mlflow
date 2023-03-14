@@ -29,19 +29,166 @@ format:
    #footer: Setup | Jan Kirenz
 ---
 
-# Basics {background-image="images/dje.jpg"}
+# Python setup
 
+```{python}
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split
+
+import mlflow
+```
+
+# Runs {background-image="images/dje.jpg"}
+
+
+## What is a run?
+
+- MLflow Tracking is organized around the concept of runs
+
+- Runs are executions of some piece of data science code. 
+
+## Which information is recorded in a run?
+
+
+- *Code Version*: Git commit hash used for the run, if it was run from an MLflow Project.
+
+- *Start & End Time*: Start and end time of the run
+
+- *Source*: Name of the file to launch the run, or the project name and entry point for the run if run from an MLflow Project.
 
 ## 
 
-## mlflow.start_run()
+- *Parameters*: Key-value input parameters of your choice. Both keys and values are strings.
+
+- *Metrics*: Key-value metrics, where the value is numeric. 
+
+- *Artifacts*: Output files in any format. For example, you can record images (for example, PNGs), models (for example, a pickled scikit-learn model), and data files (for example, a Parquet file) as artifacts
+
+## Organize runs into experiments
+
+- You can optionally organize runs into *experiments*
+
+- Experiments group together runs for a specific task. 
+
+- You can create an experiment using the mlflow experiments CLI, with `mlflow.create_experiment()`, or using the corresponding REST parameters.
+
+## Tracking UI
+
+- Once your runs have been recorded, you can query them using the Tracking user interface (UI) or the MLflow API.
+
+## Where runs are recorded
+
+- MLflow runs can be recorded to local files, to a SQLAlchemy compatible database, or remotely to a tracking server. 
+
+- By default, the MLflow Python API logs runs locally to files in an mlruns directory wherever you ran your program. 
+
+- You can then run mlflow ui to see the logged runs.
+
+## Backend and artifact store
+
+ - Backend store persists MLflow entities (runs, parameters, metrics, tags, notes, metadata, etc)
+ 
+ - Artifact store persists artifacts (files, models, images, in-memory objects, or model summary, etc).
+
+## MLflow on localhost
+
+
+![](https://mlflow.org/docs/latest/_images/scenario_1.png)
+
+- Backend and artifact store share a directory on the local filesystem—./mlruns
+
+## MLflow on localhost with SQLite
+
+![](https://mlflow.org/docs/latest/_images/scenario_2.png)
+
+- Artifacts are stored under the local ./mlruns directory, and MLflow entities are inserted in a SQLite database file mlruns.db
+
+
+# Logging Functions
+
+## Tracking URI
+
+- `mlflow.set_tracking_uri()` connects to a tracking URI. 
+
+- You can also set the `MLFLOW_TRACKING_URI` environment variable to have MLflow find a URI from there. 
+
+- `mlflow.get_tracking_uri()` returns the current tracking URI.
+
+
+## Create experiment
+
+- `mlflow.create_experiment()` creates a new experiment and returns its ID. 
+
+- Runs can be launched under the experiment by passing the experiment ID to mlflow.start_run.
+
+## Set experiment
+
+- `mlflow.set_experiment()` sets an experiment as active. 
+
+- If the experiment does not exist, creates a new experiment. 
+
+- If you do not specify an experiment in` mlflow.start_run()`, new runs are launched under this experiment.
+
+
+## Start run
+
+- `mlflow.start_run()` returns the currently active run (if one exists), or starts a new run and returns a mlflow.ActiveRun object usable as a context manager for the current run. 
+
+- You do not need to call start_run explicitly: calling one of the logging functions with no active run automatically starts a new one.
+
+## End run
+
+- `mlflow.end_run()` ends the currently active run, if any, taking an optional run status.
+
+
+## Active run
+
+- mlflow.active_run() returns a mlflow.entities.Run object corresponding to the currently active run, if any.
+
+
+
+# Experiments
+
+## Organizing Runs in Experiments
+
+- MLflow allows you to group runs under experiments, which can be useful for comparing runs intended to tackle a particular task.
+
+## Create experiments
+
+You can create experiments using the Command-Line Interface (mlflow experiments) or the mlflow.create_experiment() Python AP
+
+```{python}
+import mlflow
+from pathlib import Path
+
+# Create an experiment name, which must be unique and case sensitive
+experiment_id = mlflow.create_experiment(
+    "ML Experiments",
+    artifact_location=Path.cwd().joinpath("mlruns").as_uri(),
+    tags={"version": "v0.0.1", "priority": "P1"},
+)
+
+experiment = mlflow.get_experiment(experiment_id)
+
+print("Name: {}".format(experiment.name))
+print("Experiment_id: {}".format(experiment.experiment_id))
+print("Artifact Location: {}".format(experiment.artifact_location))
+print("Tags: {}".format(experiment.tags))
+print("Lifecycle_stage: {}".format(experiment.lifecycle_stage))
+print("Creation timestamp: {}".format(experiment.creation_time))
+```
+
+# Code examples
+
+
+## starting and managing MLflow runs
 
 The mlflow module provides a high-level “fluent” API for starting and managing MLflow runs.
 
 . . .
 
 ```{python}
-import mlflow
 
 mlflow.start_run()
 mlflow.log_param("learning_rate", 0.02)
@@ -54,7 +201,7 @@ mlflow.end_run()
 
 - Metric (e.g. model results)
 
-## mlflow.start_run() as run
+## 
 
 - You can also use the context manager syntax like this:
 
@@ -69,6 +216,16 @@ with mlflow.start_run() as run:
 ```
 
 - Automatically terminates the run at the end of the with block.
+
+## Get tracking URI
+
+- Returns the current tracking URI:
+
+. . .
+
+```{python}
+mlflow.get_tracking_uri()
+```
 
 ## Logging multiple metrics
 
@@ -103,3 +260,64 @@ with mlflow.start_run():
 ```
 
 
+## Show active run
+
+
+```{python}
+
+
+mlflow.start_run()
+
+run = mlflow.active_run()
+
+print("Active run_id: {}".format(run.info.run_id))
+
+mlflow.end_run()
+
+
+```
+
+Get the currently active Run, or None if no such run exists.
+
+## Automatic Logging
+
+- Log metrics, parameters, and models without the need for explicit log statements.
+
+
+## mlflow.autolog() before training code
+
+- Call `mlflow.autolog()` before your training code. 
+
+```{python}
+
+mlflow.start_run()
+
+mlflow.autolog()
+
+db = load_diabetes()
+X_train, X_test, y_train, y_test = train_test_split(db.data, db.target)
+
+# Create and train models.
+rf = RandomForestRegressor(n_estimators=3, max_depth=2, max_features=2)
+rf.fit(X_train, y_train)
+
+# Use the model to make predictions on the test dataset.
+predictions = rf.predict(X_test)
+autolog_run = mlflow.last_active_run()
+
+mlflow.end_run()
+
+
+```
+
+## Library-specific logging
+
+- Use library-specific autolog calls for each library you use in your code. 
+  - Scikit-learn, Keras, Pytorch, XGBoost, Gluon,  LightGBM, Statsmodels, Spark, Fastai
+
+
+
+```{python}
+
+mlflow.active_run()
+```

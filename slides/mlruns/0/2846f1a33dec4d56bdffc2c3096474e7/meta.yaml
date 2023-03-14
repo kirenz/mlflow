@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/0/2846f1a33dec4d56bdffc2c3096474e7/artifacts
+end_time: 1678788925971
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2846f1a33dec4d56bdffc2c3096474e7
+run_name: skittish-frog-943
+run_uuid: 2846f1a33dec4d56bdffc2c3096474e7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678788923900
+status: 3
+tags: []
+user_id: jankirenz
