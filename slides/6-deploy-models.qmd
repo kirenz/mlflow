@@ -59,10 +59,11 @@ from sklearn.model_selection import train_test_split
   - deployment to cloud platforms like Microsoft Azure ML, Amazon SageMaker
   - using custom deployment solutions.
 
-# Local deployment
+## Validate model local
 
+- Before we 
 
-- Run the script `deploy_local.py`
+- Run the script `validate_model_local.py` to check if your model behaves as expected
 
 
 ```{python}
@@ -93,5 +94,35 @@ print("Prediction:", prediction)
 ```
 
 
+## 
+
+```{python}
 
 
+# Set the tracking URI to the local 'mlruns' folder (if not already set)
+mlflow.set_tracking_uri("file://" + os.path.abspath("mlruns"))
+
+# Replace these placeholders with the appropriate values for your use case
+registered_model_name = "your_registered_model_name"
+model_version = 1
+
+# Update the model version stage to "Production"
+mlflow.tracking.MlflowClient().transition_model_version_stage(
+    name=registered_model_name,
+    version=model_version,
+    stage="Production"
+)
+
+
+```
+
+
+## MLFlow UI
+
+To mark a specific model version as "Production," you can either use the MLflow UI or the MLflow API.
+
+In the MLflow UI:
+
+Locate the desired model version in the Model Version Management page.
+Click on the three-dot menu on the right side of the row for the specific model version.
+Select "Transition to -> Production" from the menu.
