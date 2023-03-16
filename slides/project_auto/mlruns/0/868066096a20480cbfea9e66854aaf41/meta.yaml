@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/868066096a20480cbfea9e66854aaf41/artifacts
+end_time: 1678954426658
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 868066096a20480cbfea9e66854aaf41
+run_name: illustrious-calf-159
+run_uuid: 868066096a20480cbfea9e66854aaf41
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678954424047
+status: 4
+tags: []
+user_id: jankirenz

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/953084de7332458684e00f7e2678ad87/artifacts
+end_time: 1678904696035
+entry_point_name: ''
+experiment_id: '842655331285510848'
+lifecycle_stage: active
+run_id: 953084de7332458684e00f7e2678ad87
+run_name: victorious-ant-63
+run_uuid: 953084de7332458684e00f7e2678ad87
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678904696027
+status: 3
+tags: []
+user_id: jankirenz

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/649364540238726780/4094a51003a84249a9fdf9f469e4699f/artifacts
+end_time: 1678904212368
+entry_point_name: ''
+experiment_id: '649364540238726780'
+lifecycle_stage: active
+run_id: 4094a51003a84249a9fdf9f469e4699f
+run_name: capricious-wren-0
+run_uuid: 4094a51003a84249a9fdf9f469e4699f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678904212363
+status: 3
+tags: []
+user_id: jankirenz

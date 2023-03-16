@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/project_auto/mlruns/515057415516525923/baa8c5d8eb564765a373ae58ecdd77d9/artifacts
+end_time: 1678957367512
+entry_point_name: ''
+experiment_id: '515057415516525923'
+lifecycle_stage: active
+run_id: baa8c5d8eb564765a373ae58ecdd77d9
+run_name: masked-stoat-548
+run_uuid: baa8c5d8eb564765a373ae58ecdd77d9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678957314765
+status: 3
+tags: []
+user_id: jankirenz

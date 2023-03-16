@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/0/fceb376f6e1e400ebcd6b67e7af5477e/artifacts
+end_time: 1678902179740
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fceb376f6e1e400ebcd6b67e7af5477e
+run_name: selective-skink-818
+run_uuid: fceb376f6e1e400ebcd6b67e7af5477e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678902179734
+status: 3
+tags: []
+user_id: jankirenz

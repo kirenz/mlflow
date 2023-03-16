@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/0/f79da40049a74c54b25028792302ed07/artifacts
+end_time: 1678900710125
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f79da40049a74c54b25028792302ed07
+run_name: nimble-ram-580
+run_uuid: f79da40049a74c54b25028792302ed07
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678900710119
+status: 3
+tags: []
+user_id: jankirenz

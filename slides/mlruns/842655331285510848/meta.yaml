@@ -1,0 +1,6 @@
+artifact_location: file:///Users/jankirenz/lectures/mlflow/slides/mlruns
+creation_time: 1678904605900
+experiment_id: '842655331285510848'
+last_update_time: 1678904605900
+lifecycle_stage: active
+name: My MLflow Experiment

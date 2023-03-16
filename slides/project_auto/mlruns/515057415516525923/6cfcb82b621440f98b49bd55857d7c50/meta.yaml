@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/project_auto/mlruns/515057415516525923/6cfcb82b621440f98b49bd55857d7c50/artifacts
+end_time: 1678956562115
+entry_point_name: ''
+experiment_id: '515057415516525923'
+lifecycle_stage: active
+run_id: 6cfcb82b621440f98b49bd55857d7c50
+run_name: dapper-moth-169
+run_uuid: 6cfcb82b621440f98b49bd55857d7c50
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678956510902
+status: 4
+tags: []
+user_id: jankirenz

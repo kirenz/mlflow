@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/649364540238726780/7c3f427bbe6c4a9b804c809aa0712f30/artifacts
+end_time: 1678904270355
+entry_point_name: ''
+experiment_id: '649364540238726780'
+lifecycle_stage: active
+run_id: 7c3f427bbe6c4a9b804c809aa0712f30
+run_name: nimble-cow-133
+run_uuid: 7c3f427bbe6c4a9b804c809aa0712f30
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678904270340
+status: 3
+tags: []
+user_id: jankirenz

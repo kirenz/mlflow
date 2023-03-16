@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/project/mlruns/0/50de14e40c7841d48a36d80c559253a9/artifacts
+end_time: 1678910725397
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 50de14e40c7841d48a36d80c559253a9
+run_name: dapper-shrew-441
+run_uuid: 50de14e40c7841d48a36d80c559253a9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678910635687
+status: 3
+tags: []
+user_id: jankirenz

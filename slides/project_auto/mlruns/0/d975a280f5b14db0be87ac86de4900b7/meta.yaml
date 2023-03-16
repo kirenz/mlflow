@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/d975a280f5b14db0be87ac86de4900b7/artifacts
+end_time: 1678955669798
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d975a280f5b14db0be87ac86de4900b7
+run_name: resilient-wren-831
+run_uuid: d975a280f5b14db0be87ac86de4900b7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678955610510
+status: 4
+tags: []
+user_id: jankirenz

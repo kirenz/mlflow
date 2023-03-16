@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/0/cb322dd6a5554764affaa6ab8fad7901/artifacts
+end_time: 1678901740902
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cb322dd6a5554764affaa6ab8fad7901
+run_name: dashing-shrew-256
+run_uuid: cb322dd6a5554764affaa6ab8fad7901
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678901740897
+status: 4
+tags: []
+user_id: jankirenz

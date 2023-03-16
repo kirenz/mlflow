@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/mlruns/43d79be99cf9425a9ca99bcf7b2f1ca8/artifacts
+end_time: 1678904612766
+entry_point_name: ''
+experiment_id: '842655331285510848'
+lifecycle_stage: active
+run_id: 43d79be99cf9425a9ca99bcf7b2f1ca8
+run_name: dapper-tern-546
+run_uuid: 43d79be99cf9425a9ca99bcf7b2f1ca8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678904612759
+status: 3
+tags: []
+user_id: jankirenz

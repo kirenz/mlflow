@@ -1,0 +1,12 @@
+creation_timestamp: 1678958736476
+current_stage: None
+description: null
+last_updated_timestamp: 1678958736476
+name: IrisClassifier
+run_id: da22e09d42d94b0db3e7981e919d3b1d
+run_link: null
+source: file:///Users/jankirenz/lectures/mlflow/slides/project_auto/mlruns/140368831435798405/da22e09d42d94b0db3e7981e919d3b1d/artifacts/model
+status: READY
+status_message: null
+user_id: null
+version: 3

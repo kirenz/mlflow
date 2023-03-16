@@ -1,0 +1,9 @@
+name: My Autologging MLflow Project
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      experiment_name: { type: str, default: "My MLflow Experiment" }
+    command: "python train.py --experiment_name {experiment_name}"

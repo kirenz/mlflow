@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/jankirenz/lectures/mlflow/slides/project_auto/mlruns/515057415516525923/ab704b7db61b407da624de80b4010a2f/artifacts
+end_time: 1678956915028
+entry_point_name: ''
+experiment_id: '515057415516525923'
+lifecycle_stage: active
+run_id: ab704b7db61b407da624de80b4010a2f
+run_name: kindly-ray-645
+run_uuid: ab704b7db61b407da624de80b4010a2f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1678956859274
+status: 4
+tags: []
+user_id: jankirenz
