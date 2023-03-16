@@ -1,0 +1,101 @@
+---
+title: "Mlflow"
+lang: en 
+subtitle: "Register Models"
+author: Jan Kirenz
+execute:
+  eval: false
+  echo: true
+highlight-style: github
+format:
+  revealjs: 
+    toc: true
+    toc-depth: 1
+    embed-resources: false
+    theme: [dark, custom.scss]  
+    incremental: false
+    transition: slide
+    transition-speed: slow
+    background-transition: fade
+    code-copy: true
+    code-line-numbers: true
+    smaller: false
+    scrollable: true
+    slide-number: c
+    preview-links: auto
+    chalkboard: 
+      buttons: false
+   #logo: images/logo.png
+   #footer: Setup | Jan Kirenz
+---
+
+
+
+# Python setup
+
+```{python}
+
+import numpy as np
+import mlflow.pyfunc
+import mlflow
+
+from pathlib import Path
+
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split
+
+```
+
+
+# Basics
+
+
+## MLflow Model Registry
+
+- After a run was successful, you can register the model in the MLflow Model Registry or deploy it for serving predictions in a production environment. 
+
+- First, you need to register the trained model with the MLflow Model Registry. 
+
+
+
+## Python API
+
+- Run the script `register_model.py` in the parent directory of mlruns:
+
+```{python}
+
+# Set the tracking URI if you are not using the default one
+# mlflow.set_tracking_uri("http://your_tracking_uri:port")
+
+# Set the experiment you used for the run
+mlflow.set_experiment("My Custom Experiment Name")
+
+# Get the run_id for the run you want to register the model from
+# Replace the id with your actual run ID of the successful run
+your_run_id = "da22e09d42d94b0db3e7981e919d3b1d"
+
+# Register the model
+model_uri = f"runs:/{your_run_id}/model"
+model_name = "IrisClassifier"
+mlflow.register_model(model_uri, model_name)
+
+
+```
+
+
+## Using the MLflow UI
+
+
+- Open the MLflow UI by running mlflow ui in your terminal (in the )
+
+- navigating to http://localhost:5000.
+
+- Find the experiment containing your successful run, and click on it.
+
+- Locate the run with the trained model you want to register, and click on it.
+
+- In the "Artifacts" section, find the model folder (or the folder you used to save the model), and click on "Register Model" next to it.
+
+- Enter a name for the registered model, and click "Register".
+
