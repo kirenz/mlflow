@@ -4,7 +4,7 @@ lang: en
 subtitle: "Tracking experiments"
 author: Jan Kirenz
 execute:
-  eval: true
+  eval: false
   echo: true
 highlight-style: github
 format:
@@ -32,11 +32,15 @@ format:
 # Python setup
 
 ```{python}
+
+import mlflow
+
+from pathlib import Path
+
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import load_diabetes
 from sklearn.model_selection import train_test_split
 
-import mlflow
 ```
 
 # Runs {background-image="images/dje.jpg"}
@@ -144,7 +148,7 @@ import mlflow
 
 ## Active run
 
-- mlflow.active_run() returns a mlflow.entities.Run object corresponding to the currently active run, if any.
+- `mlflow.active_run()` returns a mlflow.entities.Run object corresponding to the currently active run, if any.
 
 
 
@@ -152,19 +156,31 @@ import mlflow
 
 ## Organizing Runs in Experiments
 
-- MLflow allows you to group runs under experiments, which can be useful for comparing runs intended to tackle a particular task.
+- MLflow allows you to group runs under experiments
+
+- This can be useful for comparing runs intended to tackle a particular task.
 
 ## Create experiments
 
-You can create experiments using the Command-Line Interface (mlflow experiments) or the mlflow.create_experiment() Python AP
+You can create experiments using:
+
+- Command-Line Interface (mlflow experiments) 
+
+- `mlflow.create_experiment()` Python API
+
+
+## Python API
+
+- Create an experiment name, which must be unique and case sensitive
+
+. . . 
 
 ```{python}
-import mlflow
-from pathlib import Path
 
-# Create an experiment name, which must be unique and case sensitive
+experiment_name = "My MLflow Experiment"
+
 experiment_id = mlflow.create_experiment(
-    "ML Experiments",
+    experiment_name,
     artifact_location=Path.cwd().joinpath("mlruns").as_uri(),
     tags={"version": "v0.0.1", "priority": "P1"},
 )
@@ -179,18 +195,58 @@ print("Lifecycle_stage: {}".format(experiment.lifecycle_stage))
 print("Creation timestamp: {}".format(experiment.creation_time))
 ```
 
+
+# Tracking UI
+
+## Key features
+
+- The Tracking UI lets you visualize, search and compare runs, as well as download run artifacts or metadata for analysis in other tools.
+
+- The UI contains the following key features:
+
+  - Experiment-based run listing and comparison (including run comparison across multiple experiments)
+
+  - Searching for runs by parameter or metric value
+
+  - Visualizing run metrics
+
+  - Downloading run results
+
+
+
+## Start tracking UI
+
+- If you log runs to a local mlruns directory, run mlflow ui in the directory above it, and it loads the corresponding runs.
+
+. . .
+
+```{bash}
+#| eval: false
+
+mlflow ui
+
+```
+
+- open the UI at http://127.0.0.1:5000 (if the connection fails, first try another browser)
+
+
 # Code examples
 
 
 ## starting and managing MLflow runs
 
-The mlflow module provides a high-level “fluent” API for starting and managing MLflow runs.
+- The mlflow module provides a high-level “fluent” API for starting and managing MLflow runs.
 
 . . .
 
 ```{python}
 
-mlflow.start_run()
+experiment = mlflow.get_experiment_by_name(experiment_name)
+
+experiment_id = experiment.experiment_id
+
+mlflow.start_run(experiment_id=experiment_id)
+
 mlflow.log_param("learning_rate", 0.02)
 mlflow.log_metric("mse", 2500.00)
 
@@ -209,7 +265,7 @@ mlflow.end_run()
 
 ```{python}
 
-with mlflow.start_run() as run:
+with mlflow.start_run(experiment_id=experiment_id) as run:
     mlflow.log_param("learning_rate", 0.03)
     mlflow.log_metric("mse", 900.00)
 
