@@ -1,0 +1,288 @@
+---
+title: "Mlflow"
+lang: en 
+subtitle: "Register Models"
+author: Jan Kirenz
+execute:
+  eval: false
+  echo: true
+highlight-style: github
+format:
+  revealjs: 
+    toc: true
+    toc-depth: 1
+    embed-resources: false
+    theme: [dark, custom.scss]  
+    incremental: false
+    transition: slide
+    transition-speed: slow
+    background-transition: fade
+    code-copy: true
+    code-line-numbers: true
+    smaller: false
+    scrollable: true
+    slide-number: c
+    preview-links: auto
+    chalkboard: 
+      buttons: false
+   #logo: images/logo.png
+   #footer: Setup | Jan Kirenz
+---
+
+
+
+# Python setup
+
+```{python}
+
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import classification_report, accuracy_score
+import numpy as np
+import mlflow.pyfunc
+import mlflow
+
+from pathlib import Path
+
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+```
+
+
+```{python}
+# Load and split the dataset
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
+
+```
+# MLflow Model Lifecycle Stages
+
+
+## Overview
+
+
+
+- Organize, manage, and deploy models effectively
+- Track the progression of models through their lifecycle
+
+## Primary Stages
+
+- After a run was successful, you can register the model in the MLflow Model Registry  
+
+---
+
+### None
+
+- Initial stage for newly registered model versions
+- No specific stage assigned yet
+
+---
+
+### Staging
+
+- Models undergoing testing, validation, or review
+- Not yet ready for production deployment
+- Preparing for production use
+
+---
+
+### Production
+
+- Models ready for deployment in production environments
+- Passed all tests and validations
+- Expected to perform well when deployed
+
+---
+
+### Archived
+
+- Model versions no longer in active use
+- Declutters the model registry
+- Focuses on models currently in use
+
+
+
+# Model Staging Steps
+
+## Overview
+
+- Validate and test the model before promoting to production
+- Ensure model meets desired performance criteria and integrates well
+
+
+## Stage a model with Python API
+
+- Run the script stage_model.py
+
+```{python}
+# Replace these placeholders with the appropriate values for your use case
+MODEL_NAME = "IrisClassifier"
+MODEL_VERSION = 3  # Replace with the desired version number
+RUN_ID = "da22e09d42d94b0db3e7981e919d3b1d"
+MODEL_URI = f"runs:/{RUN_ID}/model"
+
+# Optional: Set the tracking URI to the local 'mlruns' folder (if not already set)
+# mlflow.set_tracking_uri("file://" + os.path.abspath("mlruns"))
+
+# Register the model
+model_details = mlflow.register_model(MODEL_URI, MODEL_NAME)
+
+# Get the model version
+model_version = model_details.version
+
+# Update the model version stage to "Staging"
+mlflow.tracking.MlflowClient().transition_model_version_stage(
+    name=MODEL_NAME,
+    version=MODEL_VERSION,
+    stage="Staging"
+)
+
+
+```
+
+
+##
+
+- To use a staged model, you'll first need to load the model from the MLflow Model Registry. 
+
+- Here's how to load a model in the "Staging" stage:
+
+
+
+```{python}
+
+MODEL_NAME = "IrisClassifier"
+
+staged_model = mlflow.sklearn.load_model(
+    model_uri=f"models:/{MODEL_NAME}/Staging")
+
+```
+
+
+## Model Evaluation
+
+- Assess model performance on validation/test dataset
+- Calculate various metrics (accuracy, precision, recall, F1-score, etc.)
+
+##
+
+```{python}
+
+
+# Assuming you have X_test, y_test from your test dataset
+y_pred = staged_model.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Classification Report:")
+print(classification_report(y_test, y_pred))
+
+
+```
+
+
+## Cross-Validation
+
+- Determine model's generalization capability
+- Train and test the model on multiple folds
+
+##
+
+```{python}
+
+# Assuming staged_model is your RandomForest classifier
+cv_scores = cross_val_score(staged_model, X, y, cv=5)
+
+print("Cross-Validation Scores:", cv_scores)
+print("Mean CV Score:", cv_scores.mean())
+
+
+```
+
+## Hyperparameter Tuning
+
+- Optimize model's hyperparameters for better performance
+- Use grid search, random search, or Bayesian optimization
+
+## Feature Importance Analysis
+
+- Analyze input feature importance
+- Identify potential issues and improve the model
+
+## Model Explanation
+
+- Use SHAP values, LIME, or partial dependence plots
+- Gain insights into the model's decision-making process
+
+## Integration Testing
+
+- Test model in a staging environment resembling production
+- Ensure integration with other system components
+
+## Model Comparison
+
+- Compare multiple models in the staging area
+- Select the best one for production deployment
+
+## Stakeholder Review
+
+- Share model performance with stakeholders
+- Gather feedback and ensure model meets project objectives
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Run the script `register_model.py` in the parent directory of mlruns:
+
+```{python}
+
+# Set the tracking URI if you are not using the default one
+# mlflow.set_tracking_uri("http://your_tracking_uri:port")
+
+# Set the experiment you used for the run
+mlflow.set_experiment("My Custom Experiment Name")
+
+# Get the run_id for the run you want to register the model from
+# Replace the id with your actual run ID of the successful run
+your_run_id = "da22e09d42d94b0db3e7981e919d3b1d"
+
+# Register the model
+model_uri = f"runs:/{your_run_id}/model"
+model_name = "IrisClassifier"
+mlflow.register_model(model_uri, model_name)
+
+
+```
+
+
+## Using the MLflow UI
+
+
+- Open the MLflow UI by running mlflow ui in your terminal (in the )
+
+- navigating to http://localhost:5000.
+
+- Find the experiment containing your successful run, and click on it.
+
+- Locate the run with the trained model you want to register, and click on it.
+
+- In the "Artifacts" section, find the model folder (or the folder you used to save the model), and click on "Register Model" next to it.
+
+- Enter a name for the registered model, and click "Register".
+
