@@ -1,0 +1,288 @@
+---
+title: "Mlflow"
+lang: en 
+subtitle: "Tracking experiments"
+author: Jan Kirenz
+execute:
+  eval: false
+  echo: true
+highlight-style: github
+format:
+  revealjs: 
+    toc: true
+    toc-depth: 1
+    embed-resources: false
+    theme: [dark, custom.scss]  
+    incremental: false
+    transition: slide
+    transition-speed: slow
+    background-transition: fade
+    code-copy: true
+    code-line-numbers: true
+    smaller: false
+    scrollable: true
+    slide-number: c
+    preview-links: auto
+    chalkboard: 
+      buttons: false
+   #logo: images/logo.png
+   #footer: Setup | Jan Kirenz
+---
+
+
+
+# Python setup
+
+```{python}
+
+import mlflow
+
+from pathlib import Path
+
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split
+
+```
+
+
+# Abstract
+
+This tutorial provides an introduction to MLflow Projects, explains the purpose of the `MLproject` file, demonstrates how to manage dependencies using Conda, shows how to run projects using the CLI and Python API, and briefly mentions remote execution. 
+
+# Basics {background-image="images/dje.jpg"}
+
+## What are MLflow Projects?
+
+- A standardized format for organizing and sharing machine learning code
+
+- Encapsulate code, data, environment, and configurations
+
+- Provide reproducibility and collaboration
+
+- Run locally or remotely (e.g., on cloud platforms)
+
+
+## MLproject File
+
+- A YAML configuration file at the root of the project
+
+- Define name, dependencies, and entry points
+
+```{yaml}
+name: iris_classification
+
+# Use this to create a new env
+conda_env: conda.yaml
+
+# To use an existing env:
+#conda_env: /path/to/your/existing/#conda/environment
+
+entry_points:
+  main:
+    parameters:
+      data: {type: str, default: ""}
+      model: {type: str, default: "RandomForest"}
+    command: "python train.py --data {data} --model {model}"
+
+```
+
+## Dependencies Management
+
+- Use Conda or Docker for environment management
+
+- Define dependencies in a separate file (e.g., conda.yaml or Dockerfile)
+
+## Conda
+
+```{python}
+get_or
+
+```
+
+## conda.yaml
+
+
+Conda example (conda.yaml):
+
+. . .
+
+```{yaml}
+name: mlflow-env
+channels:
+    - conda-forge
+dependencies:
+    - python = 3.10.9
+    - pip <= 23.0
+    - pip:
+        - mlflow < 3, >= 2.1
+        - cloudpickle == 2.2.1
+        - psutil == 5.9.4
+        - scikit-learn == 1.2.1
+        - ipykernel
+        - autopep8
+```
+
+# Example 1
+
+## Running a Project
+
+- Use the MLflow CLI or Python API to run projects
+
+- Automatically set up the environment and execute the project
+
+
+
+## 
+
+Make sure you have MLflow installed in your current environment. If you don't have it installed, you can install it using pip:
+
+
+
+To run the train.py script using the MLflow CLI as part of an MLflow Project, you'll first need to ensure that you have the following files in your project directory:
+
+- MLproject: The YAML configuration file defining your MLflow project.
+
+- conda.yaml: The YAML file specifying your Conda environment and dependencies.
+
+- train.py: The Python script containing the code to load data, train the model, and log the experiment with MLflow.
+
+## CLI example
+
+Next, navigate to the directory containing the MLproject file using the command line, and run the following command to execute the train.py script using MLflow:
+
+
+
+
+```{batch}
+mlflow run . -P data=data.csv -P model=RandomForest
+
+```
+
+## Python API example:
+
+
+```{python}
+
+mlflow.run(
+    uri=".",
+    entry_point="main",
+    parameters={
+        "data": "data.csv",
+        "model": "RandomForest",
+    },
+)
+```
+
+## Run
+
+When you run the command mlflow run . -P data=data.csv -P model=RandomForest, MLflow performs the following actions:
+
+- Identify the project directory: The . after mlflow run indicates that the MLflow project is located in the current directory. MLflow looks for an MLproject file in this directory to find the project configuration.
+
+Set up the environment: MLflow checks the MLproject file for the specified environment configuration, which is typically a Conda environment (conda.yaml) or a Docker container (Dockerfile). In this case, it will create a Conda environment using the dependencies listed in the conda.yaml file.
+
+Install dependencies: MLflow installs the necessary dependencies for the project, as specified in the Conda environment file or Dockerfile.
+
+Run the entry point: MLflow executes the entry point specified in the MLproject file. In this case, the entry point is the main entry point, which runs the train.py script with the provided parameters.
+
+Pass the parameters: MLflow passes the parameters specified with the -P flags to the train.py script. In this case, the data parameter is set to data.csv, and the model parameter is set to RandomForest. The train.py script uses these parameters to save the Iris dataset as a CSV file named data.csv and train a random forest classifier.
+
+Log the run: As the train.py script executes, it logs information about the run, such as the model type, accuracy, log loss, and the trained model itself, using the MLflow Python API.
+
+Clean up: After the script finishes running, MLflow cleans up the environment (e.g., by removing the temporary Conda environment).
+
+Once the run is complete, you can view the logged experiment details, such as run parameters and metrics, in the MLflow UI by running mlflow ui in your terminal and navigating to http://localhost:5000 in your web browser.
+
+
+## Example with autologging
+
+See folder project_auto
+
+```{python}
+
+```
+
+
+# Remote Execution
+
+##
+
+- Run projects on remote platforms (e.g., Databricks, Kubernetes)
+
+- Specify the backend using the --backend and --backend-config options
+Example for running a project on Databricks:
+
+
+```{bash}
+
+mlflow run . -P data=data.csv -P model=RandomForest --backend databricks --backend-config cluster.json
+
+
+```
+
+## Summary
+
+- MLflow Projects provide a standardized way to organize and share ML code
+
+- They help ensure reproducibility and collaboration
+
+- Run projects locally or remotely using the MLflow CLI or Python API
+
+## Delete temporary envs
+
+- When you run an MLflow project with a Conda environment, MLflow automatically creates a temporary environment for that project run. 
+
+
+## Find the temporary environments
+
+- The temporary environments created by MLflow usually have a name starting with mlflow- followed by a unique identifier. 
+
+
+```{bash}
+conda env list
+```
+
+## Delete the temporary environments
+
+- Once you've identified the temporary environments created by MLflow, you can remove them using the conda env remove command followed by the --name flag and the name of the environment.
+
+
+```{bash}
+conda env remove --name mlflow-<unique_identifier>
+
+```
+
+## Automate the cleanup process (macOS)
+
+
+If you want to clean up multiple temporary environments at once, you can use a script to automate the process. Here's an example script for Linux/macOS:
+
+
+
+```{bash}
+#!/bin/bash
+
+# List all environments starting with "mlflow-"
+mlflow_envs=$(conda env list | awk '$1 ~ /^mlflow-/ {print $1}')
+
+# Remove each environment
+for env in $mlflow_envs; do
+  echo "Removing environment: $env"
+  conda env remove --name "$env"
+done
+
+```
+
+## Automate the cleanup process (Windows)
+
+PowerShell:
+
+```{bash}
+$mlflowEnvs = conda env list | ForEach-Object { if ($_ -match "^mlflow-") { ($_ -split "\s+")[0] } }
+foreach ($env in $mlflowEnvs) {
+    Write-Host "Removing environment: $env"
+    conda env remove --name $env
+}
+
+```
