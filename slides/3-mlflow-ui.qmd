@@ -1,0 +1,127 @@
+---
+title: "Mlflow"
+lang: en 
+subtitle: "UI"
+author: Jan Kirenz
+execute:
+  eval: false
+  echo: true
+highlight-style: github
+format:
+  revealjs: 
+    toc: true
+    toc-depth: 1
+    embed-resources: false
+    theme: [dark, custom.scss]  
+    incremental: false
+    transition: slide
+    transition-speed: slow
+    background-transition: fade
+    code-copy: true
+    code-line-numbers: true
+    smaller: false
+    scrollable: true
+    slide-number: c
+    preview-links: auto
+    chalkboard: 
+      buttons: false
+   #logo: images/logo.png
+   #footer: Setup | Jan Kirenz
+---
+
+# Python setup
+
+```{python}
+
+import mlflow
+
+```
+
+# Runs {background-image="images/dje.jpg"}
+
+To stop the MLflow UI, you need to terminate the process running the mlflow ui command. Here's how you can do it in different command-line environments:
+
+Windows Command Prompt:
+
+Press Ctrl + C in the Command Prompt window where the MLflow UI is running. This will send an interrupt signal to the process, stopping the MLflow UI.
+macOS/Linux Terminal:
+
+Press Ctrl + C in the Terminal window where the MLflow UI is running. This will send an interrupt signal to the process, stopping the MLflow UI.
+Windows PowerShell:
+
+Press Ctrl + C or Ctrl + Break in the PowerShell window where the MLflow UI is running. Either of these key combinations will send an interrupt signal to the process, stopping the MLflow UI.
+After you stop the MLflow UI, you'll see that the command prompt returns to the normal state, allowing you to enter new commands. If you want to start the MLflow UI again, just run the mlflow ui command in your terminal or command prompt
+
+
+If the MLflow UI is running in the background and you're not sure which terminal window or process it is associated with, you can find and terminate the process manually.
+
+For macOS/Linux:
+
+Open a terminal window.
+
+Run the following command to find the process ID (PID) of the MLflow UI:
+
+```{bash}
+
+ps aux | grep "mlflow ui"
+```
+
+This command will list all processes that include "mlflow ui" in their command line. You should see a line similar to this (the actual PID will be different):
+
+```{bash}
+
+user     12345  0.1  0.5  123456  56789 pts/0    Sl+  12:34   0:01 mlflow ui
+
+```
+
+
+In this example, the PID of the MLflow UI process is 12345.
+
+Terminate the process by running the kill command with the PID you found:
+
+
+```{bash}
+kill 12345
+
+
+```
+
+
+## For Windows:
+
+- Open a Command Prompt or PowerShell window.
+
+Run the following command to find the process ID (PID) of the MLflow UI:
+
+```{bash}
+wmic process where "commandline like '%mlflow ui%'" get processid, commandline
+
+```
+
+This command will list all processes that include "mlflow ui" in their command line. You should see a line similar to this (the actual PID will be different):
+
+
+```{bash}
+CommandLine                                      ProcessId
+mlflow ui                                        12345
+
+```
+
+
+In this example, the PID of the MLflow UI process is 12345.
+
+Terminate the process by running the taskkill command with the PID you found:
+
+
+```{bash}
+taskkill /PID 12345 /F
+
+
+```
+
+Replace 12345 with the actual PID of the MLflow UI process.
+
+After terminating the MLflow UI process, it will no longer be running in the background. If you want to start the MLflow UI again, just run the mlflow ui command in your terminal or command prompt.
+
+
+
