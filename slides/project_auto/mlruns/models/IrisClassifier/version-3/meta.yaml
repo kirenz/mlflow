@@ -1,7 +1,7 @@
 creation_timestamp: 1678958736476
-current_stage: Staging
+current_stage: Production
 description: null
-last_updated_timestamp: 1678967030334
+last_updated_timestamp: 1679058335408
 name: IrisClassifier
 run_id: da22e09d42d94b0db3e7981e919d3b1d
 run_link: null
