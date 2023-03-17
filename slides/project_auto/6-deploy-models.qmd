@@ -1,0 +1,139 @@
+---
+title: "Mlflow"
+lang: en 
+subtitle: "Deploy Models"
+author: Jan Kirenz
+execute:
+  eval: false
+  echo: true
+highlight-style: github
+format:
+  revealjs: 
+    toc: true
+    toc-depth: 1
+    embed-resources: false
+    theme: [dark, custom.scss]  
+    incremental: false
+    transition: slide
+    transition-speed: slow
+    background-transition: fade
+    code-copy: true
+    code-line-numbers: true
+    smaller: false
+    scrollable: true
+    slide-number: c
+    preview-links: auto
+    chalkboard: 
+      buttons: false
+   #logo: images/logo.png
+   #footer: Setup | Jan Kirenz
+---
+
+
+
+# Python setup
+
+```{python}
+
+import mlflow
+from mlflow.tracking import MlflowClient
+
+
+```
+
+
+
+## Move model to production 
+
+-After registering and staging the model, you can deploy it to various production environments 
+
+- MLflow supports multiple deployment options, such as  
+  - local deployment
+  - deployment to cloud platforms like Microsoft Azure ML, Amazon SageMaker
+  - using custom deployment solutions.
+
+
+## Move model to production 
+
+- First, import the required libraries
+
+. . .
+
+```{python}
+
+# Create an MlflowClient instance
+client = MlflowClient()
+
+# Model information
+REGISTERED_MODEL_NAME = "IrisClassifier"
+MODEL_VERSION = 3
+
+# Update the model version's stage to "Production"
+client.transition_model_version_stage(
+    name=REGISTERED_MODEL_NAME,
+    version=MODEL_VERSION,
+    stage="Production"
+)
+
+print(
+    f"Model version {MODEL_VERSION} has been transitioned to Production stage")
+
+
+```
+
+## Deploy the model
+
+- Deploy to a cloud service or on-premises server
+- Use MLflow integrations or deploy as a REST API
+
+## Create an API with FastAPI
+
+- You'll first need to install FastAPI and an ASGI server like Uvicorn:
+
+
+
+
+## Interface with Streamlit
+
+
+
+## Monitor the model
+
+- Track model performance, resource usage, and other relevant metrics
+- Identify potential issues and maintain a high-quality service
+
+## Implement a maintenance plan
+
+- Regularly retrain the model with the latest data
+- Address issues identified during monitoring
+- Update model or infrastructure as needed
+
+## Establish a model update process
+
+- Automate the model training, evaluation, and deployment pipeline
+- Transition new model versions through appropriate stages in MLflow
+
+## Implement feedback loops
+
+- Collect user feedback or additional data to improve the model
+- Identify areas for performance enhancement or potential issues to address
+
+
+
+
+
+
+
+<!--
+
+## MLFlow UI
+
+To mark a specific model version as "Production," you can also use the MLflow UI.
+
+In the MLflow UI:
+
+Locate the desired model version in the Model Version Management page.
+Click on the three-dot menu on the right side of the row for the specific model version.
+Select "Transition to -> Production" from the menu.
+
+-->
