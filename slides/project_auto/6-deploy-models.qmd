@@ -35,12 +35,15 @@ format:
 
 ```{python}
 
+import numpy as np
+from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException
+import mlflow.pyfunc
 import mlflow
 from mlflow.tracking import MlflowClient
 
 
 ```
-
 
 
 ## Move model to production 
@@ -55,7 +58,7 @@ from mlflow.tracking import MlflowClient
 
 ## Move model to production 
 
-- First, import the required libraries
+- First, import the required libraries (see Python Setup)
 
 . . .
 
@@ -81,21 +84,98 @@ print(
 
 ```
 
-## Deploy the model
+# Deploy the model with FastAPI
 
-- Deploy to a cloud service or on-premises server
-- Use MLflow integrations or deploy as a REST API
 
 ## Create an API with FastAPI
 
-- You'll first need to install FastAPI and an ASGI server like Uvicorn:
+- You'll need the conda environment [fastapi-env](https://github.com/kirenz/environments/blob/main/env-fastapi.yml)
+
+- Next, you can create a FastAPI app to serve the MLflow model. 
+
+- Take a look at a the file named `app.py` 
+
+## Run the App
+
+- Open a terminal and navigate to the directory containing your app.py file
+
+- Run the following command:
+
+. . .
+
+```{bash}
+uvicorn app:app --host 0.0.0.0 --port 8000
+```
+
+<!--
+This command starts the Uvicorn server with your FastAPI app on port 8000. The --host 0.0.0.0 flag allows connections from any IP address, making the app accessible on your local network. You can change the port number if needed.
+-->
+
+## Access the API
+
+- For API documentation, go to <http://localhost:8000/docs> or <http://127.0.0.1:8000/docs>
+
+## Make a Prediction
+
+- Make a POST request to the /predict endpoint
+Example using curl:
+
+```{bash}
+!curl -X POST "http://localhost:8000/predict" -H "accept:
+
+```
+
+- This command sends a JSON object with the input data to the /predict endpoint and returns the prediction as a JSON response.
+
+## Deploy with model monitoring using MySQL
+
+- Follow the setup instructions to create a MySQL-Database
+
+- Create a .env file in your project directory with the following content:
+
+```{bash}
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+DB_HOST=your_host
+DB_NAME=your_dbname
+
+```
+
+## 
+
+- Take a look at the file app_monitor
+
+## Run the App
+
+- Open a terminal and navigate to the directory containing the app_monitor.py file
+
+- Run the following command:
+
+. . .
+
+```{bash}
+uvicorn app_monitor:app --host 0.0.0.0 --port 8000
+```
+
+## Make a request 
 
 
+```{bash}
+curl -X POST "http://localhost:8000/predict" -H "Content-Type: application/json" -d '{"sepal_length": 5.1, "sepal_width": 3.5, "petal_length": 1.4, "petal_width": 0.2}'
 
+```
 
-## Interface with Streamlit
+- This command sends a POST request with the input features as a JSON payload in the request body.
 
+# Deploy model with Streamlit
 
+##
+
+- Use the streamlit-env environment
+
+- Take a look at the Python file named streamlit_app.py
+
+# Further topics
 
 ## Monitor the model
 
