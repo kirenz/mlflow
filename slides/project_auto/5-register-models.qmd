@@ -35,6 +35,8 @@ format:
 
 ```{python}
 
+import matplotlib.pyplot as plt
+import pandas as pd
 import numpy as np
 import mlflow.pyfunc
 import mlflow
@@ -58,6 +60,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 
 ```
+
 # MLflow Model Lifecycle Stages
 
 
@@ -210,6 +213,25 @@ print("Mean CV Score:", cv_scores.mean())
 
 - Analyze input feature importance
 - Identify potential issues and improve the model
+
+##
+
+```{python}
+
+# Assuming X is a DataFrame and staged_model is your RandomForest classifier
+feature_importances = pd.Series(
+    staged_model.feature_importances_, index=X.columns)
+feature_importances.sort_values(ascending=False, inplace=True)
+
+# Plotting feature importances
+plt.figure(figsize=(10, 5))
+feature_importances.plot(kind='bar')
+plt.title('Feature Importances')
+plt.xlabel('Features')
+plt.ylabel('Importance')
+plt.show()
+
+```
 
 ## Model Explanation
 
